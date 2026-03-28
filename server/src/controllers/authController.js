@@ -4,7 +4,6 @@ import prisma from '../config/db.js'
 
 export const register = async (req, res) => {
     const { username, email, password } = req.body
-    console.log('Body recibido:', req.body)
 
     try {
         const existingUser = await prisma.user.findUnique({
@@ -85,7 +84,6 @@ export const login = async (req, res) => {
             }
         })
 
-
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
@@ -161,4 +159,11 @@ export const logout = async (req, res) => {
     })
 
     res.json({ message: 'Sesión cerrada exitosamente' })
+}
+
+export const getWatchlist = async (req, res) => {
+    const watchlist = await prisma.watchlist.findMany({
+        where: { userId: req.userId }
+    })
+    res.json(watchlist)
 }

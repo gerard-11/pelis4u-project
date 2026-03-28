@@ -17,7 +17,6 @@ export const loginSchema = z.object({
     password: z.string().min(1, 'La contraseña es requerida')
 })
 
-//este es un middleware para comparar body creado o enviado correctamente
 export const validate = (schema) => (req, res, next) => {
     const result = schema.safeParse(req.body)
 

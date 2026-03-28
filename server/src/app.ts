@@ -5,6 +5,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import authRoutes from './routes/authRoutes.js'
+import {authMiddleware} from "./middlewares/authMiddleware.js";
 
 const app = express()
 
@@ -25,6 +26,10 @@ app.get('/', (req, res) => {
     res.json({ message: '🎬 CineApp API funcionando' })
 })
 app.use('/api/auth', authRoutes)
+
+app.get('/api/protected', authMiddleware, (req, res) => {
+    res.json({ message: `Hola usuario ${req.userId}` })
+})
 
 const PORT = process.env.PORT || 5000
 
