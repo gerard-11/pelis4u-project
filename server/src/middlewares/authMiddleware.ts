@@ -1,5 +1,8 @@
+import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 
+// extendemos la interfaz Request de Express globalmente
+// esto le dice a TypeScript que req.userId existe en toda la app
 declare global {
     namespace Express {
         interface Request {
@@ -8,11 +11,16 @@ declare global {
     }
 }
 
-export const authMiddleware = (req: any, res: any, next: any) => {
+export const authMiddleware = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): void => {
     const authHeader = req.headers.authorization
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ message: 'No autorizado' })
+        res.status(401).json({ message: 'No autorizado' })
+        return
     }
 
     const token = authHeader.split(' ')[1]
@@ -25,8 +33,7 @@ export const authMiddleware = (req: any, res: any, next: any) => {
 
         req.userId = decoded.userId
         next()
-
-    } catch (error) {
-        return res.status(401).json({ message: 'Token inválido o expirado' })
+    } catch {
+        res.status(401).json({ message: 'Token inválido o expirado' })
     }
 }

@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { Request, Response, NextFunction } from 'express'
 
 export const registerSchema = z.object({
     username: z
@@ -16,8 +17,10 @@ export const loginSchema = z.object({
     email: z.string().email('El email no es válido'),
     password: z.string().min(1, 'La contraseña es requerida')
 })
+export type RegisterInput = z.infer<typeof registerSchema>
+export type LoginInput = z.infer<typeof loginSchema>
 
-export const validate = (schema) => (req, res, next) => {
+export const validate = (schema:z.ZodTypeAny) => (req:Request, res:Response, next:NextFunction) => {
     const result = schema.safeParse(req.body)
 
     if (!result.success) {
@@ -27,7 +30,6 @@ export const validate = (schema) => (req, res, next) => {
 
         })
     }
-
     req.body = result.data
     next()
 }
