@@ -9,6 +9,7 @@ import {authMiddleware} from "./middlewares/authMiddleware.js";
 import moviesRoutes from "./routes/movies.routes.js";
 import {errorHandler} from "./middlewares/errorHandler.js";
 import watchlistRouter from "./routes/watchlist.routes.js"
+import reviewsRouter from "./routes/review.routes.js"
 
 const app = express()
 
@@ -36,6 +37,8 @@ app.get('/api/protected', authMiddleware, (req, res) => {
 app.use("/api/movies", moviesRoutes);
 
 app.use("/api/watchlist", watchlistRouter);
+
+app.use("/api/reviews", reviewsRouter);
 
 app.use(errorHandler)
 const PORT = process.env.PORT || 5000

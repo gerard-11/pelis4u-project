@@ -1,4 +1,4 @@
-import prisma from "../config/db.js"; // ajusta el path según tu archivo de prisma client
+import prisma from "../config/db.js";
 
 export async function getWatchlist(userId: string) {
     return prisma.watchlist.findMany({

@@ -40,11 +40,11 @@ model Review {
   rating    Float // 1.0 a 10.0
   content   String   @db.VarChar(500)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt // se actualiza de forma automatica cada vez que se edita el registro
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, movieId]) // un usuario, una reseña por película
+  @@unique([userId, movieId])
 }
 
 model RefreshToken {

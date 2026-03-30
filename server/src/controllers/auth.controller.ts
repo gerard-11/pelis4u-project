@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import prisma from '../config/db.js'
-import { RegisterInput, LoginInput } from '../middlewares/validate.js'
+import { RegisterInput, LoginInput } from '../middlewares/auth.schemas.js'
 
 export const register = async (
     req: Request<{}, {}, RegisterInput>,
