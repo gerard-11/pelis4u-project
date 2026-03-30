@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser'
 import authRoutes from './routes/authRoutes.js'
 import {authMiddleware} from "./middlewares/authMiddleware.js";
 import moviesRoutes from "./routes/movies.routes.js";
+import {errorHandler} from "./middlewares/errorHandler.js";
 
 const app = express()
 
@@ -33,6 +34,7 @@ app.get('/api/protected', authMiddleware, (req, res) => {
 })
 app.use("/api/movies", moviesRoutes);
 
+app.use(errorHandler)
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
