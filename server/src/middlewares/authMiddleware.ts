@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 
-// extendemos la interfaz Request de Express globalmente
-// esto le dice a TypeScript que req.userId existe en toda la app
 declare global {
     namespace Express {
         interface Request {

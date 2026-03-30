@@ -8,6 +8,7 @@ import authRoutes from './routes/authRoutes.js'
 import {authMiddleware} from "./middlewares/authMiddleware.js";
 import moviesRoutes from "./routes/movies.routes.js";
 import {errorHandler} from "./middlewares/errorHandler.js";
+import watchlistRouter from "./routes/watchlist.routes.js"
 
 const app = express()
 
@@ -33,6 +34,8 @@ app.get('/api/protected', authMiddleware, (req, res) => {
     res.json({ message: `Hola usuario ${req.userId}` })
 })
 app.use("/api/movies", moviesRoutes);
+
+app.use("/api/watchlist", watchlistRouter);
 
 app.use(errorHandler)
 const PORT = process.env.PORT || 5000
