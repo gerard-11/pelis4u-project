@@ -27,3 +27,5 @@ build/
 # Logs
 logs/
 *.logserver/.env
+#prisma
+server/generated/
