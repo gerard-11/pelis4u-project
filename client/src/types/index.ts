@@ -123,7 +123,6 @@ export interface UpdateReviewBody {
 }
 
 // Errores del API
-
 export interface ApiError {
     message: string
     statusCode: number
