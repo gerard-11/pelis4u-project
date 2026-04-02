@@ -21,7 +21,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             }
         }
         initializedAuth()
-    },[setAuth, clearAuth])
+    },[setAuth, clearAuth]) // las funciones del store nunca causan re-ejecucion no cambian de referencia en este effect no tienen uso mas que evitar que eslint nos marque un error este efecto solo se ejecuta una vez al incio de la app 
 
 if(isInitializing){
     return(
