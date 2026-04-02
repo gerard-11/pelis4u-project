@@ -14,8 +14,6 @@ export function useLogin() {
     })
 }
 
-// ---- Register ----
-
 export function useRegister() {
     const { setAuth } = useAuthStore()
 
@@ -23,7 +21,6 @@ export function useRegister() {
         mutationFn: registerApi,
 
         onSuccess: (data) => {
-            // Igual que login — el backend registra y devuelve el token listo
             setAuth(data.accessToken, data.user)
         },
     })
@@ -35,13 +32,12 @@ export function useLogout() {
     return useMutation({
         mutationFn: logoutApi,
         onSuccess: () => {
-            // Limpiamos el store — el usuario ya no está autenticado
+
+
             clearAuth()
 
-            // Limpiamos TODO el caché de TanStack Query.
-            // Importante: datos como la watchlist o el perfil son privados.
-            // Si no los limpiamos, el próximo usuario que inicie sesión
-            // en el mismo navegador podría ver datos del anterior.
+          
+            clearAuth()
             queryClient.clear()
         },
     })
