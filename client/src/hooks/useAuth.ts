@@ -35,7 +35,6 @@ export function useLogout() {
 
 
             clearAuth()
-
           
             clearAuth()
             queryClient.clear()
