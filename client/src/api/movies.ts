@@ -2,8 +2,8 @@ import { axiosClient } from '@/lib/axiosClient'
 import type { Credits, Movie, MovieDetail, PaginatedResponse } from '@/types'
 
 export async function getTrendingMovies(): Promise<Movie[]> {
-    const { data } = await axiosClient.get<Movie[]>('/api/movies/trending')
-    return data
+    const { data } = await axiosClient.get<PaginatedResponse<Movie>>('/api/movies/trending')
+    return data.results
 }
 
 export async function searchMovies(query: string, page = 1): Promise<PaginatedResponse<Movie>> {
