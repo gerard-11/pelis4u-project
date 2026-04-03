@@ -19,7 +19,6 @@ export function useRegister() {
 
     return useMutation({
         mutationFn: registerApi,
-
         onSuccess: (data) => {
             setAuth(data.accessToken, data.user)
         },
@@ -32,10 +31,6 @@ export function useLogout() {
     return useMutation({
         mutationFn: logoutApi,
         onSuccess: () => {
-
-
-            clearAuth()
-          
             clearAuth()
             queryClient.clear()
         },
