@@ -15,6 +15,7 @@ export async function searchMovies(query: string, page = 1): Promise<PaginatedRe
 
 export async function getMovieById(id: number): Promise<MovieDetail> {
     const { data } = await axiosClient.get<MovieDetail>(`/api/movies/${id}`)
+
     return data
 }
 
@@ -24,6 +25,6 @@ export async function getMovieCredits(id: number): Promise<Credits> {
 }
 
 export async function getSimilarMovies(id: number): Promise<Movie[]> {
-    const { data } = await axiosClient.get<Movie[]>(`/api/movies/${id}/similar`)
-    return data
+    const { data } = await axiosClient.get<PaginatedResponse<Movie>>(`/api/movies/${id}/similar`)
+    return data.results
 }

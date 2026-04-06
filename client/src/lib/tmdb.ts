@@ -1,6 +1,5 @@
 const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p'
 
-// Tamaños disponibles de TMDB
 type ImageSize = 'w200' | 'w300' | 'w500' | 'w780' | 'original'
 
 export function getTmdbImage(
