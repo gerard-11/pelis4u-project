@@ -3,6 +3,8 @@ import { useMovieDetail, useMovieCredits, useSimilarMovies } from '@/hooks/useMo
 import { useMovieReviews } from '@/hooks/useReviews'
 import { MovieCard } from '@/components/MovieCard'
 import { getTmdbImage } from '@/lib/tmdb'
+import {useAddToWatchlist, useRemoveFromWatchlist, useWatchlist} from "@/hooks/useWatchlist.ts";
+import {useAuthStore} from "@/store/authStore.ts";
 
 export default function MovieDetail() {
     const { id } = useParams<{ id: string }>()
@@ -11,7 +13,21 @@ export default function MovieDetail() {
     const { data: credits } = useMovieCredits(movieId)
     const { data: similar } = useSimilarMovies(movieId)
     const { data: reviews } = useMovieReviews(movieId)
-console.log('credits',movie?.tagline)
+    const { user } = useAuthStore()
+    const { data: watchlist } = useWatchlist()
+    const { mutate: addMovie, isPending: isAdding } = useAddToWatchlist()
+    const { mutate: removeMovie, isPending: isRemoving } = useRemoveFromWatchlist()
+
+    const isInWatchlist = watchlist?.some((item) => item.movieId === movieId)
+
+    function handleWatchlist() {
+        if (isInWatchlist) {
+            removeMovie(movieId)
+        } else {
+            addMovie(movieId)
+        }
+    }
+
     if (isLoading) {
         return (
             <div className="flex h-screen items-center justify-center">
@@ -88,6 +104,23 @@ console.log('credits',movie?.tagline)
                   {genre.name}
                 </span>
                             ))}
+                            {user && (
+                                <button
+                                    onClick={handleWatchlist}
+                                    disabled={isAdding || isRemoving}
+                                    className={`w-fit px-6 py-2 rounded-lg   cursor-pointer font-semibold text-sm transition-colors disabled:opacity-50 ${
+                                        isInWatchlist
+                                            ? 'bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white'
+                                             : 'bg-blue-600 hover:bg-blue-700 text-white'
+                                    }`}
+                                >
+                                    {isAdding || isRemoving
+                                        ? 'Cargando...'
+                                        : isInWatchlist
+                                            ? '❌ Quitar de Watchlist'
+                                            : '+ Agregar a Watchlist'}
+                                </button>
+                            )}
                         </div>
 
                         <p className="text-gray-300 leading-relaxed max-w-2xl">
