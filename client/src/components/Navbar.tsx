@@ -65,7 +65,7 @@ export function Navbar() {
                                 to="/profile"
                                 className="text-gray-300 hover:text-white text-sm transition-colors"
                             >
-                                {user.email.split('@')[0]}
+                                {user.username}
                             </Link>
                             <button
                                 onClick={handleLogout}

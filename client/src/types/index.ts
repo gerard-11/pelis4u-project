@@ -8,6 +8,7 @@ export interface LoginCredentials {
 export interface RegisterCredentials {
     email: string
     password: string
+    username: string
 }
 
 export interface AuthResponse {
@@ -21,6 +22,7 @@ export interface AuthResponse {
 export interface AuthUser {
     id: number
     email: string
+    username: string
 }
 
 // Movies

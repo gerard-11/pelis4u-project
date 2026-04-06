@@ -5,7 +5,6 @@ import { queryClient } from '@/lib/queryClient'
 
 export function useLogin() {
     const { setAuth } = useAuthStore()
-
     return useMutation({
         mutationFn: loginApi,
         onSuccess: (data) => {
@@ -16,7 +15,6 @@ export function useLogin() {
 
 export function useRegister() {
     const { setAuth } = useAuthStore()
-
     return useMutation({
         mutationFn: registerApi,
         onSuccess: (data) => {
