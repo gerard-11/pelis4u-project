@@ -5,6 +5,7 @@ import { MovieCard } from '@/components/MovieCard'
 import { getTmdbImage } from '@/lib/tmdb'
 import {useAddToWatchlist, useRemoveFromWatchlist, useWatchlist} from "@/hooks/useWatchlist.ts";
 import {useAuthStore} from "@/store/authStore.ts";
+import {ReviewForm} from "@/components/ReviewForm.tsx";
 
 export default function MovieDetail() {
     const { id } = useParams<{ id: string }>()
@@ -44,7 +45,7 @@ export default function MovieDetail() {
         )
     }
 
-    // Solo mostramos los primeros 10 del reparto
+
     const mainCast = credits?.cast.slice(0, 10) ?? []
 
     const director = credits?.crew.find((c) => c.job === 'Director')
@@ -156,11 +157,15 @@ export default function MovieDetail() {
                     <h2 className="text-white text-xl font-bold mb-4">
                         Reviews {reviews && reviews.length > 0 && `(${reviews.length})`}
                     </h2>
-
+                    {user && (
+                        <div className="mb-6">
+                            <ReviewForm movieId={movieId} />
+                        </div>
+                    )}
                     {reviews?.length === 0 || !reviews ? (
-                        <p className="text-gray-400">
-                            No hay reviews todavía. ¡Sé el primero!
-                        </p>
+                            <p className="text-gray-400">
+                                No hay reviews todavía. ¡Sé el primero!
+                            </p>
                     ) : (
                         <div className="flex flex-col gap-4">
                             {reviews.map((review) => (
