@@ -1,5 +1,12 @@
 import prisma from "../config/db.js";
 import * as movieService from './tmdb.service.js'
+type WatchlistWithMovie = {
+    movie: movieService.TmdbMovie
+    id: string
+    userId: string
+    movieId: number
+    addedAt: Date
+}
 
 export async function getWatchlist(userId: string) {
     const watchlist = await prisma.watchlist.findMany({
@@ -7,7 +14,7 @@ export async function getWatchlist(userId: string) {
         orderBy: { addedAt: 'desc' },
     })
 
-    const watchlistWithMovies = await Promise.all(
+    const watchlistWithMovies:WatchlistWithMovie[] = await Promise.all(
         watchlist.map(async (item) => {
             const movie = await movieService.getMovieById(item.movieId)
             return {
