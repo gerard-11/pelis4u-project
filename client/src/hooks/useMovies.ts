@@ -34,11 +34,7 @@ export function useMovieDetail(id: number) {
     return useQuery({
         queryKey: movieKeys.detail(id),
         queryFn: () => getMovieById(id),
-<<<<<<< HEAD
-        staleTime: 1000 * 60 * 30, // 30 minutos
-=======
-        staleTime: 1000 * 60 * 30
->>>>>>> 04e8ece (feat: add useMovies and useAuth custom hooks)
+        staleTime: 1000 * 60 * 30,
     })
 }
 
@@ -49,11 +45,7 @@ export function useMovieCredits(id: number) {
         staleTime: 1000 * 60 * 30,
     })
 }
-<<<<<<< HEAD
-``
-=======
 
->>>>>>> 04e8ece (feat: add useMovies and useAuth custom hooks)
 export function useSimilarMovies(id: number) {
     return useQuery({
         queryKey: movieKeys.similar(id),

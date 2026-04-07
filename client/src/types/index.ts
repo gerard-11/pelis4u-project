@@ -1,4 +1,3 @@
-// Auth
 
 export interface LoginCredentials {
     email: string
@@ -8,6 +7,7 @@ export interface LoginCredentials {
 export interface RegisterCredentials {
     email: string
     password: string
+    username: string
 }
 
 export interface AuthResponse {
@@ -15,15 +15,17 @@ export interface AuthResponse {
     user: {
         id: number
         email: string
+        username: string
     }
 }
 
 export interface AuthUser {
     id: number
     email: string
+    username: string
 }
 
-// Movies
+
 
 export interface Movie {
     id: number
@@ -58,7 +60,7 @@ export interface ProductionCompany {
     logo_path: string | null
 }
 
-//credits
+
 export interface Cast {
     id: number
     name: string
@@ -80,7 +82,7 @@ export interface Credits {
     crew: Crew[]
 }
 
-// Paginación
+
 export interface PaginatedResponse<T> {
     page: number
     results: T[]
@@ -88,15 +90,15 @@ export interface PaginatedResponse<T> {
     total_results: number
 }
 
-// Watchlist
+
 export interface WatchlistItem {
     id: number
     movieId: number
     userId: number
-    createdAt: string
+    addedAt: string
     movie: Movie
 }
-//reviews
+
 export interface Review {
     id: number
     movieId: number

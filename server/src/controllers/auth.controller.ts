@@ -102,6 +102,7 @@ export const refresh = async (
         return
     }
 
+
     try {
         const decoded = jwt.verify(
             token,
@@ -112,6 +113,15 @@ export const refresh = async (
 
         if (!storedToken) {
             res.status(401).json({ message: 'Token inválido' })
+            return
+        }
+        const user = await prisma.user.findUnique({
+            where: { id: decoded.userId },
+            select: { id: true, username: true, email: true }
+        })
+
+        if (!user) {
+            res.status(401).json({ message: 'Usuario no encontrado' })
             return
         }
 
@@ -127,7 +137,7 @@ export const refresh = async (
             { expiresIn: '15m' }
         )
 
-        res.json({ accessToken })
+        res.json({ accessToken, user })
     } catch {
         res.status(401).json({ message: 'Token inválido' })
     }

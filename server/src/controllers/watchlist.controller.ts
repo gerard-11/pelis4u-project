@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import * as watchlistService from "../services/watchlist.service.js";
 
-// GET /api/watchlist
 export async function getWatchlist(
     req: Request,
     res: Response,
