@@ -18,10 +18,13 @@ export async function getWatchlist(userId: string) {
     })
 
     const watchlistWithMovies= await Promise.all(
-        watchlist.map(async (item):Promise<WatchlistWithMovie> => {
+        watchlist.map(async (item) => {
             const movie = await movieService.getMovieById(item.movieId)
             return {
-                ...item,
+                id: item.id,
+                userId: item.userId,
+                movieId: item.movieId,
+                addedAt: item.addedAt,
                 movie,
             } as WatchlistWithMovie
         })
