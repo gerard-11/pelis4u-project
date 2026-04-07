@@ -1,5 +1,12 @@
 import prisma from "../config/db.js";
 import * as movieService from './tmdb.service.js'
+type WatchlistWithMovie = {
+    movie: movieService.TmdbMovie
+    id: string
+    userId: string
+    movieId: number
+    addedAt: Date
+}
 
 type WatchlistWithMovie = {
     movie: movieService.TmdbMovie
