@@ -6,6 +6,7 @@ import { getTmdbImage } from '@/lib/tmdb'
 import {useAddToWatchlist, useRemoveFromWatchlist, useWatchlist} from "@/hooks/useWatchlist.ts";
 import {useAuthStore} from "@/store/authStore.ts";
 import {ReviewForm} from "@/components/ReviewForm.tsx";
+import {ReviewItem} from "@/components/ReviewItem.tsx";
 
 export default function MovieDetail() {
     const { id } = useParams<{ id: string }>()
@@ -19,6 +20,7 @@ export default function MovieDetail() {
     const { mutate: addMovie, isPending: isAdding } = useAddToWatchlist()
     const { mutate: removeMovie, isPending: isRemoving } = useRemoveFromWatchlist()
 
+    const currentReview= reviews?.some(r=> r.user.id === user?.id)
     const isInWatchlist = watchlist?.some((item) => item.movieId === movieId)
 
     function handleWatchlist() {
@@ -157,7 +159,7 @@ export default function MovieDetail() {
                     <h2 className="text-white text-xl font-bold mb-4">
                         Reviews {reviews && reviews.length > 0 && `(${reviews.length})`}
                     </h2>
-                    {user && (
+                    {user && !currentReview &&(
                         <div className="mb-6">
                             <ReviewForm movieId={movieId} />
                         </div>
@@ -169,25 +171,7 @@ export default function MovieDetail() {
                     ) : (
                         <div className="flex flex-col gap-4">
                             {reviews.map((review) => (
-                                <div
-                                    key={review.id}
-                                    className="bg-gray-800 rounded-xl p-4 flex flex-col gap-2"
-                                >
-                                    <div className="flex items-center justify-between">
-                    <span className="text-white font-semibold text-sm">
-                      {review.user.email.split('@')[0]}
-                    </span>
-                                        <span className="text-yellow-400 text-sm font-bold">
-                      ⭐ {review.rating}/10
-                    </span>
-                                    </div>
-                                    <p className="text-gray-300 text-sm leading-relaxed">
-                                        {review.content}
-                                    </p>
-                                    <p className="text-gray-500 text-xs">
-                                        {new Date(review.createdAt).toLocaleDateString('es-MX')}
-                                    </p>
-                                </div>
+                                <ReviewItem key={review.id} review={review} />
                             ))}
                         </div>
                     )}
