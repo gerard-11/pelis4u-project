@@ -8,13 +8,6 @@ type WatchlistWithMovie = {
     addedAt: Date
 }
 
-type WatchlistWithMovie = {
-    movie: movieService.TmdbMovie
-    id: string
-    userId: string
-    movieId: number
-    addedAt: Date
-}
 
 export async function getWatchlist(userId: string) {
     const watchlist = await prisma.watchlist.findMany({
