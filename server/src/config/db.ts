@@ -1,6 +1,5 @@
-// @ts-ignore
-import { PrismaClient } from '../../generated/prisma/client.js'
 import { PrismaPg } from '@prisma/adapter-pg'
+import {PrismaClient} from "@prisma/client";
 
 declare global {
     var prisma: PrismaClient | undefined

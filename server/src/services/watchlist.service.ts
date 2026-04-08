@@ -1,6 +1,5 @@
 import prisma from "../config/db.js";
 import * as movieService from './tmdb.service.js'
-import watchlistRoutes from "../routes/watchlist.routes.js";
 
 
 type WatchlistWithMovie = {
@@ -18,15 +17,11 @@ export async function getWatchlist(userId: string) {
         orderBy: { addedAt: 'desc' }
     })
 
-
-    const watchlistWithMovies= await Promise.all(
-        watchlist.map(async (item:WatchlistWithMovie):Promise<WatchlistWithMovie> => {
+    const watchlistWithMovies:WatchlistWithMovie[]= await Promise.all(
+        watchlist.map(async (item) => {
             const movie = await movieService.getMovieById(item.movieId)
             return {
-                id: item.id,
-                userId: item.userId,
-                movieId: item.movieId,
-                addedAt: item.addedAt,
+            ...item,
                 movie,
             } as WatchlistWithMovie
         })
