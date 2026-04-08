@@ -25,7 +25,10 @@ app.use(helmet())
 app.use(morgan('dev'))
 
 app.use(cookieParser())
-
+app.use(cors({
+    origin: "https://pelis4u-project-qoux7oaxt-gerardo-j-ritos-projects.vercel.app",
+    credentials: true
+}))
 app.get('/', (req, res) => {
     res.json({ message: '🎬 CineApp API funcionando' })
 })
@@ -41,6 +44,7 @@ app.use("/api/watchlist", watchlistRouter);
 app.use("/api/reviews", reviewsRouter);
 
 app.use(errorHandler)
+
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {

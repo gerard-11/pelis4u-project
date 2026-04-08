@@ -21,6 +21,5 @@ export function errorHandler(
         return;
     }
 
-    // Caso 3: Se lanzó algo que no es un Error (raro pero posible)
     res.status(500).json({ message: "Error interno del servidor" });
 }
