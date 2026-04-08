@@ -26,7 +26,7 @@ app.use(morgan('dev'))
 
 app.use(cookieParser())
 app.use(cors({
-    origin: "https://pelis4u-project-qoux7oaxt-gerardo-j-ritos-projects.vercel.app",
+    origin: "https://pelis4u-project.vercel.app/",
     credentials: true
 }))
 app.get('/', (req, res) => {
