@@ -116,7 +116,8 @@ export async function getMoviesByGenre(
 ){
     try{
         const { genreId } = req.params;
-        const movies= await tmdbService.getMoviesByGenre(Number(genreId));
+        const page = req.query.page ? Number(req.query.page) : 1;
+        const movies= await tmdbService.getMoviesByGenre(Number(genreId),page);
 
         res.json(movies);
     }catch(error){

@@ -103,11 +103,15 @@ export async function getGenresMovies():Promise<Genre[]>{
     return data.genres;
 }
 
-export async function getMoviesByGenre(genreId:number):Promise<TmdbMovie[]>{
+export async function getMoviesByGenre(
+    genreId:number,
+    page:number = 1
+):Promise<TmdbMovie[]>{
     const { data }= await tmdbClient.get('/discover/movie',{
         params: {
             with_genres:genreId,
+            page,
         },
     })
-    return data.results;
+    return data;
 }
