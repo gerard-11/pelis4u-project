@@ -5,14 +5,19 @@ import {
     getMovieById,
     getMovieCredits,
     getSimilarMovies,
+    getMoviesByGenderId,
+    getGenres
 } from '@/api/movies'
 
 export const movieKeys = {
     trending: ['movies', 'trending'] as const,
+    genres: ['movies', 'genres'] as const,
     search: (query: string, page: number) => ['movies', 'search', query, page] as const,
     detail: (id: number) => ['movies', 'detail', id] as const,
     credits: (id: number) => ['movies', 'credits', id] as const,
     similar: (id: number) => ['movies', 'similar', id] as const,
+    moviesGenre: (genderId:number,page: number) => ['movies', 'byGenre', genderId,page] as const,
+
 }
 
 export function useTrendingMovies() {
@@ -50,5 +55,20 @@ export function useSimilarMovies(id: number) {
     return useQuery({
         queryKey: movieKeys.similar(id),
         queryFn: () => getSimilarMovies(id),
+    })
+}
+
+export function useGenres() {
+    return useQuery({
+        queryKey: movieKeys.genres,
+        queryFn: getGenres,
+    })
+}
+
+export function useMovieByGender(genreId: number,page: number) {
+    return useQuery({
+        queryKey: movieKeys.moviesGenre(genreId,page),
+        queryFn: () => getMoviesByGenderId(genreId,page),
+        staleTime: 1000 * 60 * 30,
     })
 }

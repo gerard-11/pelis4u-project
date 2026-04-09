@@ -34,11 +34,11 @@ export async function getGenres(): Promise<Genre[]> {
     return data
 }
 
-export async function getMoviesById(
+export async function getMoviesByGenderId(
     genreId:number,
     page:number=1
 ): Promise<Movie[]> {
-    const { data } = await axiosClient.get<Movie[]>(`/api/movies/genre/${genreId}`,{
+    const { data } = await axiosClient.get<Movie[]>(`/api/movies/genres/${genreId}`,{
         params: { page }
     }
     )
