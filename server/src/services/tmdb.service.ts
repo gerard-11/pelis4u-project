@@ -34,14 +34,14 @@ export interface TmdbCredits {
     cast: TmdbCastMember[];
 }
 
-export interface Genre {
+export interface genreId {
     id: number;
     name: string;
 }
 
 
 export interface TmdbGenreResponse {
-    genres: Genre[];
+    genres: genreId[];
 }
 
 
@@ -98,7 +98,7 @@ export async function getSimilarMovies(
     return data;
 }
 
-export async function getGenresMovies():Promise<Genre[]>{
+export async function getGenresMovies():Promise<genreId[]>{
     const { data } = await tmdbClient.get<TmdbGenreResponse>(`/genre/movie/list`);
     return data.genres;
 }
@@ -113,5 +113,5 @@ export async function getMoviesByGenre(
             page,
         },
     })
-    return data;
+    return data.results;
 }
