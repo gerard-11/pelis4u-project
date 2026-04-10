@@ -23,9 +23,11 @@ export default function Home() {
 
     return (
         <main className="min-h-screen bg-gray-900 px-6 py-8">
-            <h1 className="text-white text-3xl font-bold mb-8">
-                🎬 Tendencias
-            </h1>
+            <div className="flex space-between">
+                <h1 className="text-blue-500 text-xl font-bold mb-8 md:text-5xl">
+                    🎬 Tendencias
+                </h1>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {movies?.map((movie) => (
                     <MovieCard key={movie.id} movie={movie} />
