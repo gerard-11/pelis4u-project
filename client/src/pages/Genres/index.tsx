@@ -11,6 +11,7 @@ export function Genres (){
     const { data: movie,isLoading,isError} = useMovieByGender(id,page)
     const {data: genre}=useGenres()
     const genreName=genre?.find(gen=> gen.id == id)
+
     if (isLoading) {
         return (
             <div className="flex h-screen items-center justify-center">
