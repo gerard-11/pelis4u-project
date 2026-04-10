@@ -1,2 +1,83 @@
 @import "tailwindcss";
 
+@layer components {
+
+    .app-title {
+        @apply text-3xl md:text-4xl p-1
+        font-extrabold
+        bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
+        bg-[length:200%_200%]
+        bg-clip-text text-transparent
+        transition-all duration-500;
+    }
+
+    .app-title:hover {
+        background-position: right center;
+        border: aliceblue solid 1px ;
+        border-radius: 5px;
+    }
+
+    .section-title {
+        @apply text-3xl md:text-4xl
+        font-semibold
+        mb-3
+        bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400
+        bg-clip-text text-transparent;
+    }
+
+    .tag {
+        @apply inline-flex items-center
+        text-xs md:text-sm
+        px-3 md:px-4
+        py-1 md:py-1.5
+        rounded-full
+        text-white
+        whitespace-nowrap
+        transition-all duration-200
+        bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20
+        border border-white/10 backdrop-blur-md;
+    }
+
+    .tag:hover {
+        @apply from-blue-500/30 via-purple-500/30 to-pink-500/30 scale-105;
+    }
+
+    .btn-primary {
+        @apply text-sm md:text-base
+        px-4 md:px-2
+        py-2 md:py-1.5
+        rounded-lg
+        cursor-pointer
+        font-semibold
+        text-white
+        transition-all duration-200
+        bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
+        hover:scale-105 active:scale-95;
+    }
+    .user-badge {
+        @apply text-sm md:text-base
+        px-3 py-1
+        rounded-md
+        bg-white/10
+        text-white/80
+        border border-white/10;
+    }
+    .container-app {
+        @apply w-full max-w-7xl mx-auto px-4 md:px-6;
+    }
+    .btn-watchlist {
+        @apply inline-flex items-center justify-center
+        text-sm md:text-base
+        px-4 py-2 rounded-lg
+        font-semibold text-white
+        transition-all duration-200
+        active:scale-95;
+    }
+
+    .horizontal-scroll {
+        @apply flex gap-2 md:gap-3
+        overflow-x-auto
+        pb-3
+        scroll-smooth;
+    }
+}

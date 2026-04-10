@@ -28,7 +28,7 @@ export default function Home() {
         <main className="min-h-screen bg-gray-900 px-6 py-2">
             <div className="w-full px-3 text-center font-bold">
                 <div className="mt-3 overflow-hidden">
-                    <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-2 ">
+                    <h2 className="section-title">
                         Generos
                     </h2>
                     <div className="flex gap-2 overflow-x-auto pb-3 pr-2 scroll-smooth">
