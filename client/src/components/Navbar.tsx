@@ -37,7 +37,9 @@ export function Navbar() {
                     className="text-white font-bold text-lg shrink-0"
                     onClick={() => setMenuOpen(false)}
                 >
-                    🎬 Pelis4U
+                    <h1 className="text-xl md:text-xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                        🎬 Pelis4u
+                    </h1>
                 </Link>
 
                 {/* Buscador — oculto en móvil, visible en md+ */}
@@ -111,7 +113,7 @@ export function Navbar() {
             </div>
 
             {menuOpen && (
-                <div className="md:hidden border-t border-gray-800 px-4 py-4 flex flex-col gap-4">
+                <div className="md:hidden border-t border-gray-800 px-4 py-4 flex flex-col gap-4 items-center">
                     <form onSubmit={handleSearch} className="flex gap-2">
                         <input
                             type="text"
@@ -134,21 +136,21 @@ export function Navbar() {
                             <Link
                                 to="/watchlist"
                                 onClick={() => setMenuOpen(false)}
-                                className="text-gray-300 hover:text-white text-sm transition-colors"
+                                className="text-gray-300 hover:text-white text-md transition-colors"
                             >
                                 Mi Watchlist
                             </Link>
                             <Link
                                 to="/profile"
                                 onClick={() => setMenuOpen(false)}
-                                className="text-gray-300 hover:text-white text-sm transition-colors"
+                                className="text-gray-300 hover:text-white text-md transition-colors"
                             >
                                 {user.username}
                             </Link>
                             <button
                                 onClick={handleLogout}
                                 disabled={isPending}
-                                className="bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-sm px-3 py-2 rounded-lg transition-colors text-center"
+                                className="bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-sm px-7 py-1 rounded-lg transition-colors text-center"
                             >
                                 {isPending ? 'Saliendo...' : 'Salir'}
                             </button>

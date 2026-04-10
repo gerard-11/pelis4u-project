@@ -1,9 +1,12 @@
-import { useTrendingMovies } from '@/hooks/useMovies'
+import {useGenres, useTrendingMovies} from '@/hooks/useMovies'
 import { MovieCard } from '@/components/MovieCard'
+import {GenreTag} from "@/components/GenreTag.tsx";
 
 export default function Home() {
 
     const { data: movies, isLoading, isError } = useTrendingMovies()
+    const {data:genres} = useGenres()
+    console.log(genres)
 
     if (isLoading) {
         return (
@@ -22,9 +25,24 @@ export default function Home() {
     }
 
     return (
-        <main className="min-h-screen bg-gray-900 px-6 py-8">
-            <div className="flex space-between">
-                <h1 className="text-blue-500 text-xl font-bold mb-8 md:text-5xl">
+        <main className="min-h-screen bg-gray-900 px-6 py-2">
+            <div className="w-full px-3 text-center font-bold">
+                <div className="mt-3 overflow-hidden">
+                    <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-2 ">
+                        Generos
+                    </h2>
+                    <div className="flex gap-2 overflow-x-auto pb-3 pr-2 scroll-smooth">
+
+                        {genres?.map((genre) => (
+                            <GenreTag
+                                key={genre.id}
+                                genreId={genre.id}
+                                name={genre.name}
+                            />
+                        ))}
+                    </div>
+                </div>
+                <h1 className="text-4xl md:text-5xl font-extrabold my-3 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                     🎬 Tendencias
                 </h1>
             </div>

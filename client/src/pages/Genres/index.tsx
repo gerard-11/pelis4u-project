@@ -30,7 +30,8 @@ export function Genres (){
     return(
         <>
             <div>
-                <h1 className="text-blue-500 text-2xl my-1 text-center font-bold md:text-5xl">Genero: {genreName?.name}</h1>
+                <h1 className="text-white text-2xl my-1 text-center font-bold md:text-5xl">Genero:</h1>
+                <h2 className="text-blue-500 text-xl text-center font-bold md:text-3xl"> {genreName?.name}</h2>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 px-6 py-6">
