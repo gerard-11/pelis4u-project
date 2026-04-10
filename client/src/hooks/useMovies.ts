@@ -17,7 +17,6 @@ export const movieKeys = {
     credits: (id: number) => ['movies', 'credits', id] as const,
     similar: (id: number) => ['movies', 'similar', id] as const,
     moviesGenre: (genderId:number,page: number) => ['movies', 'byGenre', genderId,page] as const,
-
 }
 
 export function useTrendingMovies() {
