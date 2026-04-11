@@ -1,5 +1,5 @@
 import { axiosClient } from '@/lib/axiosClient'
-import type { Credits, Movie, MovieDetail, PaginatedResponse } from '@/types'
+import type {Credits, Genre, Movie, MovieDetail, PaginatedResponse} from '@/types'
 
 export async function getTrendingMovies(): Promise<Movie[]> {
     const { data } = await axiosClient.get<PaginatedResponse<Movie>>('/api/movies/trending')
@@ -27,4 +27,20 @@ export async function getMovieCredits(id: number): Promise<Credits> {
 export async function getSimilarMovies(id: number): Promise<Movie[]> {
     const { data } = await axiosClient.get<PaginatedResponse<Movie>>(`/api/movies/${id}/similar`)
     return data.results
+}
+
+export async function getGenres(): Promise<Genre[]> {
+    const { data } = await axiosClient.get<Genre[]>('/api/movies/genres')
+    return data
+}
+
+export async function getMoviesByGenderId(
+    genreId:number,
+    page:number=1
+): Promise<Movie[]> {
+    const { data } = await axiosClient.get<Movie[]>(`/api/movies/genres/${genreId}`,{
+        params: { page }
+    }
+    )
+    return data
 }

@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import * as tmdbService from "../services/tmdb.service.js";
+import {getGenresMovies} from "../services/tmdb.service.js";
+
 
 export async function getTrending(
     req: Request,
@@ -93,5 +95,32 @@ export async function getSimilarMovies(
         res.json(data);
     } catch (error) {
         next(error);
+    }
+}
+
+export async function getGenres(
+    req: Request,
+    res: Response,
+){
+    try{
+        const genres=await tmdbService.getGenresMovies()
+        res.json(genres)
+    }catch(error){
+        res.status(500).json({message: 'Error fetching genres'});
+    }
+}
+
+export async function getMoviesByGenre(
+    req: Request,
+    res: Response
+){
+    try{
+        const { genreId } = req.params;
+        const page = req.query.page ? Number(req.query.page) : 1;
+        const movies= await tmdbService.getMoviesByGenre(Number(genreId),page);
+
+        res.json(movies);
+    }catch(error){
+        res.status(500).json({message: 'Error fetching movies'});
     }
 }

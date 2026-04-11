@@ -34,6 +34,24 @@ export interface TmdbCredits {
     cast: TmdbCastMember[];
 }
 
+export interface genreId {
+    id: number;
+    name: string;
+}
+
+
+export interface TmdbGenreResponse {
+    genres: genreId[];
+}
+
+
+export interface TmdbMoviesResponse {
+    page: number;
+    results: TmdbMovie[];
+    total_pages: number;
+    total_results: number;
+}
+
 
 export async function getTrending(): Promise<TmdbPaginatedResponse> {
     const { data } = await tmdbClient.get<TmdbPaginatedResponse>(
@@ -78,4 +96,22 @@ export async function getSimilarMovies(
         }
     );
     return data;
+}
+
+export async function getGenresMovies():Promise<genreId[]>{
+    const { data } = await tmdbClient.get<TmdbGenreResponse>(`/genre/movie/list`);
+    return data.genres;
+}
+
+export async function getMoviesByGenre(
+    genreId:number,
+    page:number = 1
+):Promise<TmdbMovie[]>{
+    const { data }= await tmdbClient.get('/discover/movie',{
+        params: {
+            with_genres:genreId,
+            page,
+        },
+    })
+    return data.results;
 }

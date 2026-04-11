@@ -25,7 +25,6 @@ model Watchlist {
   userId  String
   movieId Int // ID que viene de TMDB
   addedAt DateTime @default(now())
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, movieId]) // un usuario no puede agregar la misma película dos veces
@@ -35,11 +34,10 @@ model Review {
   id        String   @id @default(uuid())
   userId    String
   movieId   Int
-  rating    Float // 1.0 a 10.0
+  rating    Float
   content   String   @db.VarChar(500)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt // se actualiza de forma automatica cada vez que se edita el registro
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, movieId])

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams} from 'react-router-dom'
 import { useMovieDetail, useMovieCredits, useSimilarMovies } from '@/hooks/useMovies'
 import { useMovieReviews } from '@/hooks/useReviews'
 import { MovieCard } from '@/components/MovieCard'
@@ -7,6 +7,7 @@ import {useAddToWatchlist, useRemoveFromWatchlist, useWatchlist} from "@/hooks/u
 import {useAuthStore} from "@/store/authStore.ts";
 import {ReviewForm} from "@/components/ReviewForm.tsx";
 import {ReviewItem} from "@/components/ReviewItem.tsx";
+import {GenreTag} from "@/components/GenreTag.tsx";
 
 export default function MovieDetail() {
     const { id } = useParams<{ id: string }>()
@@ -100,12 +101,7 @@ export default function MovieDetail() {
 
                         <div className="flex flex-wrap gap-2">
                             {movie.genres.map((genre) => (
-                                <span
-                                    key={genre.id}
-                                    className="bg-blue-600/30 text-blue-300 text-xs px-3 py-1 rounded-full"
-                                >
-                  {genre.name}
-                </span>
+                                <GenreTag genreId={genre.id} name={genre.name}/>
                             ))}
                             {user && (
                                 <button
@@ -114,7 +110,7 @@ export default function MovieDetail() {
                                     className={`w-fit px-6 py-2 rounded-lg   cursor-pointer font-semibold text-sm transition-colors disabled:opacity-50 ${
                                         isInWatchlist
                                             ? 'bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white'
-                                             : 'bg-blue-600 hover:bg-blue-700 text-white'
+                                             : 'bg-green-600 hover:bg-green-700 text-white'
                                     }`}
                                 >
                                     {isAdding || isRemoving

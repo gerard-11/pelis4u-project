@@ -8,12 +8,14 @@ import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import Watchlist from '@/pages/Watchlist'
 import Profile from '@/pages/Profile'
+import { Genres } from "@/pages/Genres"
 
 export const router = createBrowserRouter([
     {
         element: <Layout />,
         children: [
             { path: '/', element: <Home /> },
+            { path: '/genres/:genreId', element: <Genres /> },
             { path: '/search', element: <Search /> },
             { path: '/movie/:id', element: <MovieDetail /> },
             { path: '/login', element: <Login /> },

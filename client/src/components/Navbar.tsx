@@ -37,7 +37,9 @@ export function Navbar() {
                     className="text-white font-bold text-lg shrink-0"
                     onClick={() => setMenuOpen(false)}
                 >
-                    🎬 Pelis4U
+                    <h1 className="app-title">
+                        🎬 Pelis4u
+                    </h1>
                 </Link>
 
                 {/* Buscador — oculto en móvil, visible en md+ */}
@@ -54,7 +56,7 @@ export function Navbar() {
                     />
                     <button
                         type="submit"
-                        className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg transition-colors shrink-0"
+                        className="btn-primary"
                     >
                         Buscar
                     </button>
@@ -65,13 +67,13 @@ export function Navbar() {
                         <>
                             <Link
                                 to="/watchlist"
-                                className="text-gray-300 hover:text-white text-sm transition-colors"
+                                className="btn-watchlist"
                             >
                                 Mi Watchlist
                             </Link>
                             <Link
                                 to="/profile"
-                                className="text-gray-300 hover:text-white text-sm transition-colors"
+                                className="user-badge"
                             >
                                 {user.username}
                             </Link>
@@ -111,7 +113,7 @@ export function Navbar() {
             </div>
 
             {menuOpen && (
-                <div className="md:hidden border-t border-gray-800 px-4 py-4 flex flex-col gap-4">
+                <div className="md:hidden border-t border-gray-800 px-4 py-4 flex flex-col gap-4 items-center">
                     <form onSubmit={handleSearch} className="flex gap-2">
                         <input
                             type="text"
@@ -122,7 +124,7 @@ export function Navbar() {
                         />
                         <button
                             type="submit"
-                            className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg transition-colors shrink-0"
+                            className="btn-primary"
                         >
                             Buscar
                         </button>
@@ -134,21 +136,21 @@ export function Navbar() {
                             <Link
                                 to="/watchlist"
                                 onClick={() => setMenuOpen(false)}
-                                className="text-gray-300 hover:text-white text-sm transition-colors"
+                                className="btn-primary"
                             >
                                 Mi Watchlist
                             </Link>
                             <Link
                                 to="/profile"
                                 onClick={() => setMenuOpen(false)}
-                                className="text-gray-300 hover:text-white text-sm transition-colors"
+                                className="btn-primary"
                             >
                                 {user.username}
                             </Link>
                             <button
                                 onClick={handleLogout}
                                 disabled={isPending}
-                                className="bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-sm px-3 py-2 rounded-lg transition-colors text-center"
+                                className="bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white text-sm px-7 py-1 rounded-lg transition-colors text-center"
                             >
                                 {isPending ? 'Saliendo...' : 'Salir'}
                             </button>
