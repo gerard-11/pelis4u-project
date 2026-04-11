@@ -14,7 +14,7 @@ import reviewsRouter from "./routes/review.routes.js"
 const app = express()
 
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: true,
     credentials: true
 }))
 
@@ -26,6 +26,10 @@ app.use(morgan('dev'))
 
 app.use(cookieParser())
 
+app.use(cors({
+    origin: "https://pelis4u-project.vercel.app",
+    credentials: true
+}))
 app.get('/', (req, res) => {
     res.json({ message: '🎬 CineApp API funcionando' })
 })
@@ -41,6 +45,7 @@ app.use("/api/watchlist", watchlistRouter);
 app.use("/api/reviews", reviewsRouter);
 
 app.use(errorHandler)
+
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {

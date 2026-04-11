@@ -2,8 +2,10 @@ import axios from 'axios'
 import type { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
 import { useAuthStore } from '@/store/authStore'
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"
+
 export const axiosClient = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL:API_URL ,
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
